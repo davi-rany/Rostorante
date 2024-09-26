@@ -40,6 +40,12 @@ public class PedidoController {
         return new ResponseEntity<>(pedidos, HttpStatus.OK);
     }
 
+    @GetMapping("/mesa{numero}")
+    public ResponseEntity<List<Pedido>> listarPedidosPorMesa(@PathVariable Integer numero) {
+        List<Pedido> pedidos = pedidoService.listarPedidosPorMesa(numero);
+        return new ResponseEntity<>(pedidos, HttpStatus.OK);
+    }
+
     @PatchMapping("/{id}")
     public ResponseEntity<Pedido> atualizarStatus(@PathVariable Long id, @RequestParam String status) {
         Pedido pedidoAtualizado = pedidoService.atualizarStatus(id, status);

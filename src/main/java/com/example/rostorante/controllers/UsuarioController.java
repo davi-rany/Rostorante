@@ -1,6 +1,7 @@
 package com.example.rostorante.controllers;
 
 import com.example.rostorante.model.Usuario;
+import com.example.rostorante.repository.UsuarioRepository;
 import com.example.rostorante.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,10 +14,12 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @PostMapping("/registrar")
     public ResponseEntity<Usuario> registrarUsuario(@RequestBody Usuario usuario) {
-        Usuario novoUsuario = usuarioService.registrarUsuario(usuario);
+        Usuario novoUsuario = usuarioRepository.save(usuario);
         return new ResponseEntity<>(novoUsuario, HttpStatus.CREATED);
     }
 
